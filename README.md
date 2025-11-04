@@ -1,2 +1,1 @@
-# Ah_Neelgar
-Face Recognition Attendence System
+# face_recognition_flask
