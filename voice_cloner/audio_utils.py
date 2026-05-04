@@ -94,7 +94,7 @@ def audio_bytes_to_wav(file_bytes: bytes, file_name: str) -> str:
     audio_segment = AudioSegment.from_file(tmp_in_path)
     audio_segment = audio_segment.set_channels(1).set_frame_rate(SAMPLE_RATE)
 
-    wav_path = tmp_in_path.replace(suffix, ".wav")
+    wav_path = tmp_in_path.rsplit(".", 1)[0] + "_converted.wav"
     audio_segment.export(wav_path, format="wav")
 
     Path(tmp_in_path).unlink(missing_ok=True)
