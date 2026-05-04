@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI Coding Agent</title>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/theme/material-darker.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/codemirror.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/python/python.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/javascript/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/htmlmixed/htmlmixed.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/css/css.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/mode/markdown/markdown.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/12.0.2/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <header class="topbar">
+      <h1>AI Coding Agent</h1>
+      <button id="reset-chat" class="ghost-btn" title="Clear chat history">
+        Reset chat
+      </button>
+    </header>
+    <main class="layout">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <span>Workspace</span>
+          <button id="refresh-files" class="ghost-btn" title="Refresh">↻</button>
+        </div>
+        <ul id="file-tree" class="file-tree"></ul>
+      </aside>
+
+      <section class="editor-pane">
+        <div class="editor-header">
+          <span id="current-file" class="current-file">No file selected</span>
+          <div class="editor-actions">
+            <button id="save-file" class="primary-btn" disabled>Save</button>
+            <button id="delete-file" class="danger-btn" disabled>Delete</button>
+          </div>
+        </div>
+        <textarea id="editor"></textarea>
+        <div class="run-bar">
+          <input
+            id="command-input"
+            type="text"
+            placeholder="Run a shell command in workspace/ (e.g. python hello.py)"
+            autocomplete="off"
+          />
+          <button id="run-command" class="primary-btn">Run</button>
+        </div>
+        <pre id="run-output" class="run-output" aria-live="polite"></pre>
+      </section>
+
+      <section class="chat-pane">
+        <div id="chat-log" class="chat-log" aria-live="polite"></div>
+        <form id="chat-form" class="chat-form">
+          <textarea
+            id="chat-input"
+            rows="3"
+            placeholder="Ask the agent to read, write, or run something. Shift+Enter for newline."
+          ></textarea>
+          <button type="submit" class="primary-btn">Send</button>
+        </form>
+      </section>
+    </main>
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
